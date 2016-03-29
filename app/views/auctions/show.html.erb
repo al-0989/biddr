@@ -1,0 +1,14 @@
+<h1><%= @auction.title %></h1>
+
+<p><%= @auction.details %></p>
+
+<p>Current Price: <%= @auction.current_price %></p>
+
+<p>End Date: <%= @auction.end_date %></p>
+
+<hr>
+<h2>Bid</h2>
+<%= simple_form_for [@auction, @bid] do |f| %>
+  <%= f.input :amount %>
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>
