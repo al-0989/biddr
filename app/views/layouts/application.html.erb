@@ -26,8 +26,9 @@
         <!-- Auctions Actions -->
         <li><%= link_to "All Auctions", auctions_path %></li>
         <li><%= link_to "Create New Auction", new_auction_path %></li>
-
-
+        <% if user_logged_in? %>
+          <li><%= link_to "My Bids", bids_path %></li>
+        <% end %>
         <!-- Create a dropdown button for all the user options -->
         <li>
           <div class="btn-group">
@@ -46,7 +47,6 @@
               <li>
                 <% if user_logged_in? %>
                   <!-- Welcome back <%= current_user.first_name %> -->
-                  <%= link_to "Update Profile", user_path(current_user)%>
                   <%= link_to "Logout", sessions_path, method: :delete, data: {confirm: "Are you sure you want to log out?"} %>
                 <% else %>
                   <%= link_to "Login", new_session_path%>

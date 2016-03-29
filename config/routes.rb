@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     resources :bids
   end
 
+  resources :bids, only: [:index]
+
   resources :users, only: [:new, :create]
 
   resources :sessions, only: [:new, :create, :destroy] do

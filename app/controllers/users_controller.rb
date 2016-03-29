@@ -1,23 +1,25 @@
 class UsersController < ApplicationController
 
   def new
+    @user = User.new
   end
 
   def create
-    @user = User.find_by_email(params[:email])
-    if @user && @user.authenticate(params[:password])
+    @user = User.new user_params
+    if @user.save
       session[:user_id] = @user.id
-      redirect_to root_path, notice: "Logged in!"
+      redirect_to root_path, notice: "Account created!"
     else
-      flash[:alert] = "Wrong Credentials!"
+      flash[:alert] = "FAIL!!!!!"
       render :new
     end
   end
 
-  def destroy
-    session[:user_id] = nil
-    flash[:notice] = "Signed out."
-    redirect_to root_path
+  private
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :password,
+                                  :password_confirmation)
   end
-  
+
 end

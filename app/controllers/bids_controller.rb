@@ -1,5 +1,11 @@
 class BidsController < ApplicationController
 
+  before_action :authenticate_user, only: [:create]
+
+  def index
+    @bids = current_user.bids
+  end
+
   def create
   @auction = Auction.find(params[:auction_id])
   @bid = Bid.new bid_params
@@ -19,13 +25,6 @@ class BidsController < ApplicationController
     end
   end
   end
-
-  # def destroy
-  #   pledge = current_user.pledges.find params[:id]
-  #   campaign = Campaign.find(params[:campaign_id])
-  #   pledge.destroy
-  #   redirect_to campaign
-  # end
 
   private
 

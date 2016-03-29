@@ -2,13 +2,22 @@
 
 <p><%= @auction.details %></p>
 
-<p>Current Price: <%= @auction.current_price %></p>
+<h4>Current Price: <%= number_to_currency(@auction.current_price)%></h4>
 
-<p>End Date: <%= @auction.end_date %></p>
+<p>End Date: <%= @auction.end_date.in_time_zone('Pacific Time (US & Canada)').strftime("%Y-%b-%d at %I:%M%p") %></p>
 
 <hr>
 <h2>Bid</h2>
 <%= simple_form_for [@auction, @bid] do |f| %>
   <%= f.input :amount %>
-  <%= f.submit class: "btn btn-primary" %>
+  <%= f.submit class: "btn btn-success" %>
+<% end %>
+
+<hr>
+<h2>Previous Bids</h2>
+<% @auction.bids.order("created_at DESC").each do |bid| %>
+  <div class="well">
+    <p><%= number_to_currency(bid.amount) %> at: <%= bid.created_at.in_time_zone('Pacific Time (US & Canada)').strftime("%Y-%b-%d at %I:%M%p") %></p>
+    By: <%= bid.user.full_name%>
+  </div>
 <% end %>

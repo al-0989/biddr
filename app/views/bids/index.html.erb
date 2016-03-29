@@ -1,0 +1,11 @@
+<h1>My Bids</h1>
+
+<% if @bids %>
+  <% @bids.each do |b| %>
+    <div class="well">
+      <%= link_to b.auction.title, auction_path(b.auction) %>
+    </div>
+  <% end %>
+<% else %>
+  <p>You currently have no bids!</p>
+<% end %>

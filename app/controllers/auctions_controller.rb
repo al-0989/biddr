@@ -1,5 +1,7 @@
 class AuctionsController < ApplicationController
 
+  before_action :authenticate_user, only: [:new, :create]
+
   def index
     @auctions = Auction.all
   end
