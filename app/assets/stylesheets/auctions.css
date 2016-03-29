@@ -5,9 +5,14 @@
 
 .fa-gavel {
   padding: 5px 20px;
+  color: rgb(0, 0, 0);
 }
 
 .btn-group {
   padding-top: 10px;
   padding-right: 20px;
+}
+
+.navbar-custom {
+  background-color: rgb(235, 154, 69);
 }

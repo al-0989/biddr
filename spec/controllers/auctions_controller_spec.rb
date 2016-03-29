@@ -21,37 +21,37 @@ RSpec.describe AuctionsController, type: :controller do
 
   describe "#create" do
 
-      context "with valid attributes" do
-        def valid_request
-          post :create, auction:{title: "some valid title",
-            details: "some valid description",
-            end_date: 60.days.from_now
-          }
-        end
-
-        it "creates a record in the database" do
-          auction_count_before = Auction.count
-          valid_request
-          auction_count_after = Auction.count
-          expect(auction_count_after - auction_count_before).to eq(1)
-        end
+    context "with valid attributes" do
+      def valid_request
+        post :create, auction:{title: "some valid title",
+          details: "some valid description",
+          end_date: 60.days.from_now
+        }
       end
 
-      context "with invalid attributes" do
+      it "creates a record in the database" do
+        auction_count_before = Auction.count
+        valid_request
+        auction_count_after = Auction.count
+        expect(auction_count_after - auction_count_before).to eq(1)
+      end
+    end
 
-        def invalid_request
-          post :create, auction:{title: "some valid name",
-            details: nil,
-            end_date: 60.days.from_now
-          }
-        end
+    context "with invalid attributes" do
 
-        it "doesn't create a record in the database" do
-          auction_count_before = Auction.count
-          invalid_request
-          auction_count_after = Auction.count
-          expect(auction_count_before).to eq(auction_count_after)
-        end
+      def invalid_request
+        post :create, auction:{title: "some valid name",
+          details: nil,
+          end_date: 60.days.from_now
+        }
+      end
+
+      it "doesn't create a record in the database" do
+        auction_count_before = Auction.count
+        invalid_request
+        auction_count_after = Auction.count
+        expect(auction_count_before).to eq(auction_count_after)
+      end
     end
   end
 end
