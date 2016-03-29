@@ -5,6 +5,6 @@ class Auction < ActiveRecord::Base
 
   validates :title, presence: true
   validates :details, presence: true, uniqueness: true
-  # validates :end_date, presence: true
+  validates :end_date, presence: true
 
 end

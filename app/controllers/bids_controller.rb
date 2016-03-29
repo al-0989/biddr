@@ -13,6 +13,7 @@ class BidsController < ApplicationController
   @bid.user = current_user
   if @bid.amount > @auction.current_price
     @bid.save
+    byebug
     @auction.update(current_price: @bid.amount)
     redirect_to auction_path(@auction), notice: "Bid recorded!"
   else
